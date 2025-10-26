@@ -299,6 +299,17 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
+    public void doiCauHoi (View view) {
+        models.layThongTin();
+        if(models.nguoiDung.tien <10){
+            Toast.makeText(this,"Ban Da Het Tien", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        models.nguoiDung.tien = models.nguoiDung.tien -10;
+        models.luuThongTin();
+        txvTienNguoiDung.setText(models.nguoiDung.tien + "$");
+        hienCauDo();
+    }
 
 
 }

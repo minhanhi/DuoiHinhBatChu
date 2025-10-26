@@ -59,6 +59,7 @@
             android:id="@+id/gdvDapAn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center">
             android:layout_marginBottom="60dp">
 
         </GridView>
@@ -66,6 +67,14 @@
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:padding="3dp">
+            <Button
+                android:onClick="doiCauHoi"
+                android:text="Đổi câu hỏi"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:background="@drawable/bg_tien"
             android:padding="5dp"
             android:background="#E92CC2">
             <Button
