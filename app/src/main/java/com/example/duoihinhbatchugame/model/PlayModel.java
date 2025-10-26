@@ -2,6 +2,7 @@ package com.example.duoihinhbatchugame.model;
 
 import com.example.duoihinhbatchugame.PlayActivity;
 import com.example.duoihinhbatchugame.object.CauDo;
+import com.example.duoihinhbatchugame.object.NguoiDung;
 
 import java.util.ArrayList;
 
@@ -9,9 +10,10 @@ public class PlayModel {
     PlayActivity c;
     ArrayList<CauDo> arr;
     int cauSo= -1;
-
+    public NguoiDung nguoiDung;
     public PlayModel(PlayActivity c) {
         this.c = c;
+        nguoiDung = new NguoiDung();
         taoData();
     }
     private void taoData(){
@@ -27,6 +29,12 @@ public class PlayModel {
             cauSo=arr.size()-1;
         }
         return arr.get(cauSo);
-    }
 
+    }
+    public void layThongTin(){
+        nguoiDung.getTT(c);
+    }
+    public void luuThongTin(){
+        nguoiDung.saveTT(c);
+    }
 }
