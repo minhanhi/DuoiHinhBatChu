@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,7 @@ public class PlayActivity extends AppCompatActivity {
     ArrayList<String> arrDapAn;
     GridView gdvDapAn;
     ImageView imgAnhCauDo;
+    TextView txvTienNguoiDung;
     Button btnNext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class PlayActivity extends AppCompatActivity {
         gdvCauTraLoi = findViewById(R.id.gdvCauTraLoi);
         gdvDapAn = findViewById(R.id.gdvDapAn);
         imgAnhCauDo = findViewById(R.id.imgAnhCauDo);
+        txvTienNguoiDung = findViewById(R.id.txvTienNguoiDung);
     }
     private void init(){
         model = new PlayModel(this);
@@ -59,6 +62,8 @@ public class PlayActivity extends AppCompatActivity {
         hienThiCauTraLoi();
         hienThiDapAn();
         Glide.with(this).load(cauDo.anh).into(imgAnhCauDo);
+        model.layThongTin();
+        txvTienNguoiDung.setText(model.nguoiDung.tien+"$");
     }
     private void hienThiCauTraLoi(){
         gdvCauTraLoi.setNumColumns(arrCauTraLoi.size());
@@ -142,6 +147,9 @@ public class PlayActivity extends AppCompatActivity {
     s = s.toUpperCase();
     if(s.equals(dapAn.toUpperCase())){
         Toast.makeText(this,"Ban Da Chien Thang", Toast.LENGTH_SHORT).show();
+        model.layThongTin();
+        model.nguoiDung.tien=model.nguoiDung.tien+10;
+        model.luuThongTin();
         hienCauDo();
     }
 
