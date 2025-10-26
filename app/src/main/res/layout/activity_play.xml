@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:orientation="vertical"
              android:layout_height="match_parent">
 
@@ -9,7 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#E92CC2">
-
+<TextView
+    android:id="@+id/txvTienNguoiDung"
+    android:text="10"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:minWidth="100dp"
+    android:textColor="#000"
+    android:textSize="20sp"
+    android:background="@drawable/bg_money"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_margin="6dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -27,7 +40,7 @@
     <RelativeLayout
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:minHeight="100dp"
         android:background="#0000ff"
         >
@@ -38,15 +51,17 @@
 </GridView>
     </RelativeLayout>
     <RelativeLayout
+
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <GridView
-            android:layout_marginBottom="60dp"
             android:id="@+id/gdvDapAn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
+            android:layout_marginBottom="60dp">
+
         </GridView>
         <LinearLayout
             android:layout_alignParentBottom="true"
@@ -60,9 +75,33 @@
                 android:textColor="#000"
                 android:textSize="15sp"
                 android:background="@drawable/bg_tien"
+            android:padding="5dp"
+            android:background="#E92CC2">
+            <Button
+                android:onClick="moGoiY"
+                android:text="GỢI Ý"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:background="@drawable/bg_money"
+                android:layout_width="1dp"
+                android:layout_weight="1"
+                android:layout_marginRight="3dp"
+                android:layout_height="match_parent"
+                tools:ignore="OnClick" />
+            <Button
+
+                android:text="ĐỔI CÂU HỎI"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:background="@drawable/bg_money"
                 android:layout_width="1dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"/>
         </LinearLayout>
     </RelativeLayout>
+
+
+
 </LinearLayout>
