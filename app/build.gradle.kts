@@ -41,4 +41,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation("com.squareup.okhttp:okhttp:2.5.0")
 }

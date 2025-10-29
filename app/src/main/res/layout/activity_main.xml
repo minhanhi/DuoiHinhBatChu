@@ -20,6 +20,7 @@
         app:srcCompat="@drawable/logo" />
 
     <Button
+        android:onClick="choiGame"
         android:id="@+id/btnPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

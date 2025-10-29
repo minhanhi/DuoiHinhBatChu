@@ -1,5 +1,6 @@
 package com.example.duoihinhbatchugame.model;
 
+import com.example.duoihinhbatchugame.DATA;
 import com.example.duoihinhbatchugame.PlayActivity;
 import com.example.duoihinhbatchugame.object.CauDo;
 import com.example.duoihinhbatchugame.object.NguoiDung;
@@ -17,9 +18,9 @@ public class PlayModel {
         taoData();
     }
     private void taoData(){
-        arr = new ArrayList<>();
-        arr.add(new CauDo("man 1","baola","https://statics.123itvn.com/uploads/2024/03/2014-07-1723.37.47-1.png"));
-        arr.add(new CauDo("man 2","obama","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe8ziuu4UAXk7TL5t2tPTpjzr9d6x3b5yG7A&s"));
+        arr = new ArrayList<>(DATA.getData().arrCauDo);
+//        arr.add(new CauDo("man 1","baola","https://statics.123itvn.com/uploads/2024/03/2014-07-1723.37.47-1.png"));
+//        arr.add(new CauDo("man 2","obama","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe8ziuu4UAXk7TL5t2tPTpjzr9d6x3b5yG7A&s"));
 
 
     }
