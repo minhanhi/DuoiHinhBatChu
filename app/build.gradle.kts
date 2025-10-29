@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -42,4 +43,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation("com.squareup.okhttp:okhttp:2.5.0")
+    implementation(platform("com.google.firebase:firebase-bom:34.4.0")) // Dùng phiên bản mới nhất
+    implementation("com.google.firebase:firebase-database") // Realtime Database
+    implementation("com.google.firebase:firebase-analytics") // Analytics (Để giải quyết lỗi)
 }

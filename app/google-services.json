@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "973388436357",
+    "firebase_url": "https://duoihinhbatchu-69ed5-default-rtdb.firebaseio.com",
+    "project_id": "duoihinhbatchu-69ed5",
+    "storage_bucket": "duoihinhbatchu-69ed5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:973388436357:android:31a0af49d7188ec9296aec",
+        "android_client_info": {
+          "package_name": "com.example.duoihinhbatchugame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Klc-CQIZMO6gK-gdsO70EEsIXVL7aBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

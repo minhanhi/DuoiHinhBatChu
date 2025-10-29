@@ -61,11 +61,24 @@ public class PlayActivity extends AppCompatActivity {
 
     private void hienCauDo() {
         cauDo = model.layCauDo();
-        dapAn = cauDo.dapAn;
+
+        // BẮT LỖI TẠI ĐÂY: Nếu cauDo bị null (do lỗi mạng hoặc dữ liệu rỗng), ứng dụng sẽ không crash
+        if (cauDo == null) {
+            Toast.makeText(this, "Lỗi tải câu đố: Dữ liệu câu hỏi rỗng.", Toast.LENGTH_LONG).show();
+            // Quay lại MainActivity hoặc dừng lại để người dùng thử lại
+            return;
+        }
+
+        // Sử dụng Getters (getDapAn(), getAnh()) thay vì truy cập trực tiếp
+        dapAn = cauDo.getDapAn(); // Sửa từ cauDo.dapAn
+
         bamData();
         hienThiCauTraLoi();
         hienThiDapAn();
-        Glide.with(this).load(cauDo.anh).into(imgAnhCauDo);
+
+        // Sửa từ cauDo.anh
+        Glide.with(this).load(cauDo.getAnh()).into(imgAnhCauDo);
+
         model.layThongTin();
         txvTienNguoiDung.setText(model.nguoiDung.tien + "$");
     }
