@@ -46,4 +46,6 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:34.4.0")) // Dùng phiên bản mới nhất
     implementation("com.google.firebase:firebase-database") // Realtime Database
     implementation("com.google.firebase:firebase-analytics") // Analytics (Để giải quyết lỗi)
+    implementation("com.google.android.gms:play-services-ads:23.0.0") // dùng cho gg admob
+    implementation("com.google.android.material:material:1.10.0") // lib cho material design
 }
