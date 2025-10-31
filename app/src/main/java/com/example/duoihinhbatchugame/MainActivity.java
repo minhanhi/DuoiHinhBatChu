@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void choiGame(View view){
+        VibrationUtils.vibrate(this);
         if(DATA.getData().arrCauDo.size()>0){
             startActivity(new Intent(this,PlayActivity.class));
         } else {
@@ -95,5 +96,10 @@ public class MainActivity extends AppCompatActivity {
             // Thử gọi lại Firebase để tải dữ liệu
             layDuLieuCauHoi();
         }
+    }
+    public void moCaiDat(View view) {
+        VibrationUtils.vibrate(this);
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }
