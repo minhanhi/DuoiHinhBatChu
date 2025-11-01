@@ -48,17 +48,31 @@
                 android:id="@+id/txvTienNguoiDung"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="40$"
+                android:text="35$"
                 android:drawableStart="@drawable/ic_coin_resized"
                 android:drawablePadding="4dp"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:background="@drawable/bg_coin_rounded"
+                android:paddingEnd="4dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/btn_add_money"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_add_circle"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:scaleType="fitCenter"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:tint="#000000"
+                android:contentDescription="@string/app_name" />
+
         </LinearLayout>
 
         <ImageView

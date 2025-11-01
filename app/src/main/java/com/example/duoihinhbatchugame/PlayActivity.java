@@ -60,6 +60,7 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
     // === BIẾN CHO ADMOB VÀ HIỆU ỨNG ===
     private RewardedAd mRewardedAd;
+    private ImageView btnAddMoney;
     private final String TAG = "PlayActivity";
     // SỬA: Dùng RelativeLayout chứa gdvCauTraLoi làm nền cho hiệu ứng tiền bay
     private RelativeLayout relativeLayoutCauTraLoi;
@@ -95,6 +96,7 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
         // SỬA LỖI: Ánh xạ RelativeLayout mới cho hiệu ứng
         relativeLayoutCauTraLoi = findViewById(R.id.relativeLayoutCauTraLoi);
+        btnAddMoney = findViewById(R.id.btn_add_money); // Thêm dòng này
 
         // LƯU Ý: Đã loại bỏ các ánh xạ lỗi như btnAddMoney và layoutDapAn
     }
@@ -149,6 +151,7 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         gdvDapAn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // ... Logic click GridView Đáp án (gdvDapAn) giữ nguyên ...
                 // VibrationUtils.vibrate(PlayActivity.this); // Gỡ bỏ nếu không có lớp này
                 String s = parent.getItemAtPosition(position).toString();
                 if (s.length() != 0 && index < arrCauTraLoi.size()) {
@@ -171,6 +174,7 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         gdvCauTraLoi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // ... Logic click GridView Câu trả lời (gdvCauTraLoi) giữ nguyên ...
                 // VibrationUtils.vibrate(PlayActivity.this); // Gỡ bỏ nếu không có lớp này
                 String s = parent.getItemAtPosition(position).toString();
                 if (s.length() != 0) {
@@ -189,25 +193,37 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
             }
         });
 
-        // === GÁN SỰ KIỆN CLICK CHO KHU VỰC HIỂN THỊ TIỀN (THAY CHO btnAddMoney) ===
-        // Mở Dialog khi click vào TextView hiển thị tiền
-        txvTienNguoiDung.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moDialogNhanXu();
-            }
-        });
+        // === GÁN SỰ KIỆN CLICK CHO NÚT DẤU CỘNG (btnAddMoney) ===
 
-        // === SỰ KIỆN CHO NÚT HOME (Giữ nguyên) ===
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(PlayActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
-            }
-        });
+        // 1. Vô hiệu hóa click trên TextView tiền (đã chuyển chức năng)
+        txvTienNguoiDung.setOnClickListener(null);
+
+        // 2. Gán sự kiện click cho nút dấu cộng mới (btnAddMoney)
+        // Đảm bảo rằng btnAddMoney đã được ánh xạ thành công và không phải là null
+        if (btnAddMoney != null) {
+            btnAddMoney.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    moDialogNhanXu(); // Kích hoạt hàm mở dialog kiếm tiền
+                }
+            });
+        } else {
+            // Log lỗi nếu nút + không được tìm thấy, phòng trường hợp lỗi XML
+            Log.e("PlayActivity", "Button Add Money (btnAddMoney) is null.");
+        }
+
+        // === THÊM SỰ KIỆN CHO NÚT HOME (Giữ nguyên) ===
+        if (btnHome != null) {
+            btnHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PlayActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
     }
 
     private void bamData() {
