@@ -15,6 +15,9 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.DuoiHinhBatChuGame">
         <activity
+            android:name=".InfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".PlayActivity"
             android:exported="true">
 <!--            <intent-filter>-->
