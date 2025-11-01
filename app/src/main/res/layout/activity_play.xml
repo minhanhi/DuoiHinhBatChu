@@ -1,97 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-             android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#E92CC2">
-<TextView
-    android:id="@+id/txvTienNguoiDung"
-    android:text="10"
-    android:gravity="center"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:minWidth="100dp"
-    android:textColor="#000"
-    android:textSize="20sp"
-    android:background="@drawable/bg_money"
-    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_margin="6dp"/>
-    </RelativeLayout>
+    android:orientation="vertical"
+    android:background="#FAF2EE">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="#61AD3F">
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="#FFD8C9">
+        <TextView
+            android:id="@+id/txvSoThuTuCauHoi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="@drawable/bg_coin_rounded"
+            android:layout_marginEnd="16dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:visibility="gone"  />
+            <TextView
+            android:id="@+id/txvTienNguoiDung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="40$"
+            android:drawableStart="@drawable/ic_coin_resized"
+            android:drawablePadding="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@drawable/bg_coin_rounded"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+
         <ImageView
             android:id="@+id/imgAnhCauDo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             android:src="@drawable/hinh1"
-            android:scaleType="centerInside"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             />
-        </RelativeLayout>
     <RelativeLayout
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:minHeight="100dp"
-        android:background="#0000ff"
-        >
-<GridView
-    android:id="@+id/gdvCauTraLoi"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-</GridView>
-    </RelativeLayout>
-    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center">
 
-        android:gravity="center"
+        <GridView
+            android:id="@+id/gdvCauTraLoi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnWidth="50dp"
+            android:horizontalSpacing="8dp"
+            android:verticalSpacing="8dp"
+            android:numColumns="4"
+            android:gravity="center"
+            android:stretchMode="columnWidth"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            tools:listitem="@layout/item_answer_slot"
+            tools:layout_height="50dp" />
+
+    </RelativeLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="1dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="#DDDDDD" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
         <GridView
             android:id="@+id/gdvDapAn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:columnWidth="40dp"
+            android:horizontalSpacing="6dp"
+            android:verticalSpacing="6dp"
+            android:numColumns="auto_fit"
+            android:gravity="center"
+            android:stretchMode="columnWidth"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            tools:listitem="@layout/item_letter_button"
+            tools:layout_height="150dp" />
 
-        </GridView>
-        <LinearLayout
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="3dp">
-            <Button
-                android:onClick="moGoiY"
-                android:text="GỢI Ý"
-                android:gravity="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:background="@drawable/bg_money"
-                android:layout_width="1dp"
-                android:layout_weight="1"
-                android:layout_marginRight="3dp"
-                android:layout_height="match_parent"
-                tools:ignore="OnClick" />
-            <Button
-                android:onClick="doiCauHoi"
-                android:text="ĐỔI CÂU HỎI"
-                android:gravity="center"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:background="@drawable/bg_money"
-                android:layout_width="1dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp">
 
+        <Button
+            android:id="@+id/btnGoiY"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_button_hint"
+            android:text="💡 Gợi ý | 5 $"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:onClick="moGoiY"
+            app:backgroundTint="@null"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnBoQua"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button_skip"
+            android:text="▷ Bỏ qua | 10 $"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:onClick="doiCauHoi"
+            app:backgroundTint="@null"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
 
 </LinearLayout>
