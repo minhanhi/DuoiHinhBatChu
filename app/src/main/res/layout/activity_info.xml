@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FEF7F2"
+    tools:context="com.example.duoihinhbatchugame.InfoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingHorizontal="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Quay về"
+            app:tint="#F08A5D" /> <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Thông tin"
+        android:textColor="#F08A5D"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_info_button"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Liên hệ &amp; Hỗ trợ"
+                android:textColor="#F08A5D"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_baseline_email_24"
+                app:drawableTint="#F08A5D" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_info_button"
+                android:drawablePadding="16dp"
+                android:gravity="center_vertical"
+                android:padding="16dp"
+                android:text="Đánh giá ứng dụng"
+                android:textColor="#F08A5D"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_baseline_star_24"
+                app:drawableTint="#F08A5D" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_info_section"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="Về ứng dụng"
+                    android:textColor="#F08A5D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_baseline_info_24"
+                    app:drawableTint="#F08A5D" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Trò chơi giải đố hình ảnh thú vị, giúp bạn rèn luyện khả năng suy luận và từ vựng tiếng Việt. Hãy quan sát hình ảnh và đoán từ khóa phù hợp!"
+                    android:textColor="#5C5C5C"
+                    android:textSize="15sp"
+                    android:lineSpacingMultiplier="1.2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/bg_info_section"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="Mẹo chơi"
+                    android:textColor="#F08A5D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_baseline_lightbulb_24"
+                    app:drawableTint="#F08A5D" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_info_button" android:text="1" android:textColor="#F08A5D" android:textStyle="bold" android:gravity="center" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Tách từng chi tiết – Chia nhỏ nhân vật, đồ vật, hành động." android:textColor="#5C5C5C" android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_info_button" android:text="2" android:textColor="#F08A5D" android:textStyle="bold" android:gravity="center" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Tìm ẩn ý – Để ý mũi tên, ký hiệu, vị trí." android:textColor="#5C5C5C" android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_info_button" android:text="3" android:textColor="#F08A5D" android:textStyle="bold" android:gravity="center" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Để ý nhiều âm/nghĩa khác nhau của từng từ." android:textColor="#5C5C5C" android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="12dp" android:gravity="center_vertical">
+                    <TextView android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/bg_info_button" android:text="4" android:textColor="#F08A5D" android:textStyle="bold" android:gravity="center" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:text="Sử dụng gợi ý khi gặp khó khăn" android:textColor="#5C5C5C" android:textSize="15sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_info_button"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="Chính sách"
+                    android:textColor="#F08A5D"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_info_button"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:text="Điều khoản"
+                    android:textColor="#F08A5D"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
