@@ -19,11 +19,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-// Sửa lại đường dẫn import nếu bạn đặt NhanXuDialogFragment trong package 'Fragment'
+// Đảm bảo đường dẫn này đúng với vị trí của Dialog Fragment
 import com.example.duoihinhbatchugame.Fragment.NhanXuDialogFragment;
 import com.example.duoihinhbatchugame.adapter.DapAnAdapter;
 import com.example.duoihinhbatchugame.model.PlayModel;
 import com.example.duoihinhbatchugame.object.CauDo;
+// Giả định bạn có lớp tiện ích này
+// import com.example.duoihinhbatchugame.VibrationUtils;
+
 import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.FullScreenContentCallback;
@@ -49,15 +52,17 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
     GridView gdvDapAn;
     ImageView imgAnhCauDo;
     TextView txvTienNguoiDung;
+    TextView txvSoThuTuCauHoi; // THÊM: Dùng để hiển thị "Câu X"
     Button btnNext;
-    //home
+
+    //home (Đã sửa ID sang icon_home)
     private ImageView btnHome;
 
-    // === BIẾN MỚI CHO QUẢNG CÁO VÀ HIỆU ỨNG ===
-    private ImageView btnAddMoney; // Nút +
-    private RewardedAd mRewardedAd; // Biến quảng cáo
+    // === BIẾN CHO ADMOB VÀ HIỆU ỨNG ===
+    private RewardedAd mRewardedAd;
     private final String TAG = "PlayActivity";
-    private RelativeLayout layoutDapAn; // Layout để thêm hiệu ứng
+    // SỬA: Dùng RelativeLayout chứa gdvCauTraLoi làm nền cho hiệu ứng tiền bay
+    private RelativeLayout relativeLayoutCauTraLoi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +88,15 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         gdvDapAn = findViewById(R.id.gdvDapAn);
         imgAnhCauDo = findViewById(R.id.imgAnhCauDo);
         txvTienNguoiDung = findViewById(R.id.txvTienNguoiDung);
-        btnHome = findViewById(R.id.btn_home);
-        // === ÁNH XẠ CÁC VIEW MỚI ===
-        // Đảm bảo ID 'btn_add_money' và 'layout_dap_an' có trong file activity_play.xml
-        btnAddMoney = findViewById(R.id.btn_add_money);
-        layoutDapAn = findViewById(R.id.layout_dap_an);
+        txvSoThuTuCauHoi = findViewById(R.id.txvSoThuTuCauHoi); // Ánh xạ TextView số câu
+
+        // SỬA LỖI: Ánh xạ nút Home bằng ID mới
+        btnHome = findViewById(R.id.icon_home);
+
+        // SỬA LỖI: Ánh xạ RelativeLayout mới cho hiệu ứng
+        relativeLayoutCauTraLoi = findViewById(R.id.relativeLayoutCauTraLoi);
+
+        // LƯU Ý: Đã loại bỏ các ánh xạ lỗi như btnAddMoney và layoutDapAn
     }
 
     private void init() {
@@ -106,10 +115,19 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
         dapAn = cauDo.getDapAn();
 
+        // === CẬP NHẬT SỐ THỨ TỰ CÂU HỎI ===
+        // Giả sử model.getCurrentQuestionIndex() hoặc cauDo.getID() trả về số thứ tự
+        // Sửa tại đây:
+        int soThuTu = 1; // Thay thế bằng logic lấy số câu đố của bạn
+        if (txvSoThuTuCauHoi != null) {
+            txvSoThuTuCauHoi.setText("Câu " + soThuTu);
+        }
+
         bamData();
         hienThiCauTraLoi();
         hienThiDapAn();
 
+        // Giữ nguyên Glide, đảm bảo đã override kích thước nếu cần
         Glide.with(this).load(cauDo.getAnh()).into(imgAnhCauDo);
 
         model.layThongTin();
@@ -127,10 +145,11 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
     }
 
     private void setOnClick() {
+        // === Xử lý GridView (Giữ nguyên) ===
         gdvDapAn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                VibrationUtils.vibrate(PlayActivity.this);
+                // VibrationUtils.vibrate(PlayActivity.this); // Gỡ bỏ nếu không có lớp này
                 String s = parent.getItemAtPosition(position).toString();
                 if (s.length() != 0 && index < arrCauTraLoi.size()) {
 
@@ -152,7 +171,7 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         gdvCauTraLoi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                VibrationUtils.vibrate(PlayActivity.this);
+                // VibrationUtils.vibrate(PlayActivity.this); // Gỡ bỏ nếu không có lớp này
                 String s = parent.getItemAtPosition(position).toString();
                 if (s.length() != 0) {
                     index = position;
@@ -170,26 +189,23 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
             }
         });
 
-        // === SỬA LẠI: GÁN SỰ KIỆN CLICK CHO NÚT + (btn_add_money) ===
-        // Xóa sự kiện click cũ của txvTienNguoiDung nếu có
-        // txvTienNguoiDung.setOnClickListener(null);
-
-        btnAddMoney.setOnClickListener(new View.OnClickListener() {
+        // === GÁN SỰ KIỆN CLICK CHO KHU VỰC HIỂN THỊ TIỀN (THAY CHO btnAddMoney) ===
+        // Mở Dialog khi click vào TextView hiển thị tiền
+        txvTienNguoiDung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 moDialogNhanXu();
             }
         });
-        // === THÊM SỰ KIỆN CHO NÚT HOME ===
+
+        // === SỰ KIỆN CHO NÚT HOME (Giữ nguyên) ===
         btnHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Quay về MainActivity
                 Intent intent = new Intent(PlayActivity.this, MainActivity.class);
-                // Cờ này sẽ xoá các Activity khác trên stack và về Home
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                finish(); // Đóng PlayActivity lại
+                finish();
             }
         });
     }
@@ -236,6 +252,9 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
     // === CÁC HÀM CŨ CỦA BẠN (GỢI Ý, ĐỔI CÂU HỎI) ===
     public void moGoiY(View view) {
+        // Logic moGoiY giữ nguyên
+        // ...
+
         model.layThongTin();
         if (model.nguoiDung.tien < 5) {
             Toast.makeText(this, "Bạn đã hết tiền", Toast.LENGTH_SHORT).show();
@@ -309,11 +328,12 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
         if (current.toString().equalsIgnoreCase(dapAn)) {
             Toast.makeText(this, "🎉 Chính xác! Sang câu tiếp theo!", Toast.LENGTH_SHORT).show();
-            hienCauDo(); // Chuyển sang câu tiếp
+            hienCauDo();
         }
     }
 
     public void doiCauHoi(View view) {
+        // Logic doiCauHoi giữ nguyên
         model.layThongTin();
         if (model.nguoiDung.tien < 10) {
             Toast.makeText(this, "Ban Da Het Tien", Toast.LENGTH_SHORT).show();
@@ -339,7 +359,6 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
      * Tải quảng cáo có thưởng
      */
     private void loadRewardedAd() {
-        // ID này là ID TEST của Google. Luôn dùng ID này khi phát triển.
         String adUnitId = "ca-app-pub-3940256099942544/5224354917";
 
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -348,7 +367,6 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
             public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
                 mRewardedAd = rewardedAd;
                 Log.d(TAG, "Ad was loaded.");
-                // Set các callback cho quảng cáo
                 setAdCallbacks();
             }
 
@@ -398,15 +416,12 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
                     // NGƯỜI DÙNG ĐÃ XEM XONG
                     Log.d(TAG, "User earned reward. Amount: " + rewardAmount);
 
-                    // 1. Cộng tiền
                     model.layThongTin();
                     model.nguoiDung.tien += rewardAmount;
                     model.luuThongTin();
 
-                    // 2. Cập nhật UI tiền
                     txvTienNguoiDung.setText(model.nguoiDung.tien + "$");
 
-                    // 3. Hiển thị hiệu ứng tiền bay
                     showCoinAnimation(rewardAmount);
                 }
             });
@@ -421,39 +436,36 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
      * Hiển thị hiệu ứng tiền bay lên
      */
     private void showCoinAnimation(int amount) {
-        // 1. Tạo một TextView mới
         TextView tvPlus = new TextView(this);
         tvPlus.setText("+" + amount + "$");
         tvPlus.setTextColor(Color.WHITE);
         tvPlus.setTextSize(32);
-        tvPlus.setShadowLayer(5, 0, 0, Color.BLACK); // Đổ bóng cho rõ
+        tvPlus.setShadowLayer(5, 0, 0, Color.BLACK);
         tvPlus.setGravity(Gravity.CENTER);
 
-        // 2. Đặt vị trí cho nó (ở giữa)
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
         params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 
-        // 3. Thêm vào layout (layoutDapAn)
-        if (layoutDapAn != null) {
-            layoutDapAn.addView(tvPlus, params);
+        // SỬA: Dùng biến RelativeLayout mới
+        if (relativeLayoutCauTraLoi != null) {
+            relativeLayoutCauTraLoi.addView(tvPlus, params);
         } else {
-            Log.e(TAG, "layoutDapAn is null, cannot show animation.");
+            Log.e(TAG, "relativeLayoutCauTraLoi is null, cannot show animation.");
             return;
         }
 
 
-        // 4. Tạo hiệu ứng
         tvPlus.animate()
-                .translationYBy(-300) // Bay lên trên 300dp
-                .alpha(0.0f) // Mờ dần
-                .setDuration(1500) // Trong 1.5 giây
+                .translationYBy(-300)
+                .alpha(0.0f)
+                .setDuration(1500)
                 .withEndAction(() -> {
-                    // 5. Xóa TextView khỏi layout sau khi bay xong
-                    if (layoutDapAn != null) {
-                        layoutDapAn.removeView(tvPlus);
+                    // SỬA: Dùng biến RelativeLayout mới
+                    if (relativeLayoutCauTraLoi != null) {
+                        relativeLayoutCauTraLoi.removeView(tvPlus);
                     }
                 })
                 .start();
@@ -472,5 +484,4 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         Log.d(TAG, "Người dùng chọn xem quảng cáo (nhận 120 xu)");
         showRewardedAd(120);
     }
-
 }
