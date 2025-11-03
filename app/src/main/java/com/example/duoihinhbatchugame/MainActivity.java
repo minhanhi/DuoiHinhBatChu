@@ -109,4 +109,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, InfoActivity.class);
         startActivity(intent);
     }
+
+    public void moNhanThuong(View view) {
+        VibrationUtils.vibrate(this);
+        Intent intent = new Intent(this, RewardsActivity.class);
+        startActivity(intent);
+    }
 }
