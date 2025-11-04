@@ -266,29 +266,25 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
     }
 
-    // === CÁC HÀM CŨ CỦA BẠN (GỢI Ý, ĐỔI CÂU HỎI) ===
     public void moGoiY(View view) {
-        // Logic moGoiY giữ nguyên
-        // ...
-
         model.layThongTin();
         if (model.nguoiDung.tien < 5) {
             Toast.makeText(this, "Bạn đã hết tiền", Toast.LENGTH_SHORT).show();
             return;
         }
+
         int id = -1;
-        // Ưu tiên tìm ô trống
         for (int i = 0; i < arrCauTraLoi.size(); i++) {
-            if (arrCauTraLoi.get(i) == null || arrCauTraLoi.get(i).isEmpty()) {
+            String expected = ("" + dapAn.charAt(i)).toUpperCase();
+            String actual = arrCauTraLoi.get(i);
+            if (actual != null && !actual.isEmpty() && !expected.equalsIgnoreCase(actual)) {
                 id = i;
                 break;
             }
         }
         if (id == -1) {
             for (int i = 0; i < arrCauTraLoi.size(); i++) {
-                String expected = ("" + dapAn.charAt(i)).toUpperCase();
-                String actual = arrCauTraLoi.get(i).toUpperCase();
-                if (!expected.equals(actual)) {
+                if (arrCauTraLoi.get(i) == null || arrCauTraLoi.get(i).isEmpty()) {
                     id = i;
                     break;
                 }
@@ -297,34 +293,42 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
 
         if (id == -1) {
             Toast.makeText(this, "Tất cả ký tự đã đúng rồi!", Toast.LENGTH_SHORT).show();
+            new android.os.Handler().postDelayed(this::hienCauDo, 1500);
             return;
         }
 
         String goiY = ("" + dapAn.charAt(id)).toUpperCase();
-
         String oldTop = arrCauTraLoi.get(id);
+
         if (oldTop != null && !oldTop.isEmpty() && !oldTop.equalsIgnoreCase(goiY)) {
+            int viTriGoiYTrongDapAn = -1;
             for (int j = 0; j < arrDapAn.size(); j++) {
-                if (arrDapAn.get(j) == null || arrDapAn.get(j).isEmpty()) {
-                    arrDapAn.set(j, oldTop);
+                if (goiY.equalsIgnoreCase(arrDapAn.get(j))) {
+                    viTriGoiYTrongDapAn = j;
                     break;
                 }
             }
-            arrCauTraLoi.set(id, "");
-        }
 
-        int indexDuoi = -1;
-        for (int i = 0; i < arrDapAn.size(); i++) {
-            String s = arrDapAn.get(i);
-            if (s != null && s.equalsIgnoreCase(goiY)) {
-                indexDuoi = i;
-                break;
+            if (viTriGoiYTrongDapAn != -1) {
+                arrDapAn.set(viTriGoiYTrongDapAn, oldTop);
+            } else {
+                for (int j = 0; j < arrDapAn.size(); j++) {
+                    if (arrDapAn.get(j) == null || arrDapAn.get(j).isEmpty()) {
+                        arrDapAn.set(j, oldTop);
+                        break;
+                    }
+                }
             }
-        }
-        if (indexDuoi != -1) {
-            arrDapAn.set(indexDuoi, "");
+
             arrCauTraLoi.set(id, goiY);
-        } else {
+        }
+        else {
+            for (int i = 0; i < arrDapAn.size(); i++) {
+                if (goiY.equalsIgnoreCase(arrDapAn.get(i))) {
+                    arrDapAn.set(i, "");
+                    break;
+                }
+            }
             arrCauTraLoi.set(id, goiY);
         }
 
@@ -338,18 +342,15 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         txvTienNguoiDung.setText(model.nguoiDung.tien + "$");
 
         StringBuilder current = new StringBuilder();
-        for (String s : arrCauTraLoi) {
-            current.append(s);
-        }
+        for (String s : arrCauTraLoi) current.append(s == null ? "" : s);
 
         if (current.toString().equalsIgnoreCase(dapAn)) {
-            Toast.makeText(this, "🎉 Chính xác! Sang câu tiếp theo!", Toast.LENGTH_SHORT).show();
-            hienCauDo();
+            Toast.makeText(this, "Chính xác! Sang câu tiếp theo!", Toast.LENGTH_SHORT).show();
+            new android.os.Handler().postDelayed(this::hienCauDo, 1500);
         }
     }
 
     public void doiCauHoi(View view) {
-        // Logic doiCauHoi giữ nguyên
         model.layThongTin();
         if (model.nguoiDung.tien < 10) {
             Toast.makeText(this, "Ban Da Het Tien", Toast.LENGTH_SHORT).show();
@@ -360,16 +361,12 @@ public class PlayActivity extends AppCompatActivity implements NhanXuDialogFragm
         txvTienNguoiDung.setText(model.nguoiDung.tien + "$");
         hienCauDo();
     }
-    // === KẾT THÚC CÁC HÀM CŨ ===
 
-
-    // === HÀM MỞ DIALOG ===
     private void moDialogNhanXu() {
         NhanXuDialogFragment dialog = new NhanXuDialogFragment();
         dialog.show(getSupportFragmentManager(), "NhanXuDialog");
     }
-
-    // === CÁC HÀM MỚI CHO ADMOB VÀ HIỆU ỨNG ===
+    
 
     /**
      * Tải quảng cáo có thưởng
